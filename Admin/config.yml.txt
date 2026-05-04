@@ -1,0 +1,39 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "site"
+    label: "Site Content"
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "index.html"
+        fields:
+          - { label: "Hero Headline", name: "hero_headline", widget: "string" }
+          - { label: "Hero Subtext", name: "hero_subtext", widget: "text" }
+      - name: "about"
+        label: "About Page"
+        file: "index.html"
+        fields:
+          - { label: "About Headline", name: "about_headline", widget: "string" }
+          - { label: "About Body", name: "about_body", widget: "markdown" }
+          - { label: "About Image", name: "about_image", widget: "image" }
+
+  - name: "episodes"
+    label: "Episodes"
+    label_singular: "Episode"
+    folder: "content/episodes"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Guest Name", name: "guest", widget: "string", required: false }
+      - { label: "Episode Number", name: "episode_number", widget: "number" }
+      - { label: "Audio Link", name: "audio_link", widget: "string" }
+      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Show Notes", name: "body", widget: "markdown" }

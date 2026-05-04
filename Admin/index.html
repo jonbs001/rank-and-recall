@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rank & Recall | The Memory Vault</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --text: #F0EDE8;
+            --accent: #FF4D4D;
+            --grey: #2D2D2D;
+            --gold: #FFD166;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #0A0A0A;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 0;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.85;
+            text-decoration: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(10,10,10,0.95);
+            border-bottom: 1px solid var(--grey);
+            z-index: 100;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text);
+        }
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+        }
+
+        .hero {
+            padding-top: 8rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gold);
+        }
+
+        .player-placeholder {
+            border: 1px solid var(--grey);
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+
+        .episode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .episode-card {
+            border: 1px solid var(--grey);
+            padding: 2rem;
+        }
+
+        .episode-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .two-col {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .two-col img {
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--grey);
+        }
+
+        .form-placeholder {
+            border: 1px solid var(--grey);
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem 0;
+        }
+
+        footer {
+            border-top: 1px solid var(--grey);
+            padding: 4rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--grey);
+        }
+
+        footer a {
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                flex-direction: column;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .nav-links a {
+                margin-left: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-logo">RANK <span>&</span> RECALL</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#episodes">Episodes</a>
+                <a href="#list">Your List</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>The Memory Vault</h1>
+            <p>24 years. 100 songs per list. One rule: every track unlocks a memory.</p>
+            <a href="#episodes" class="btn">Listen to Episode 0</a>
+            <div class="player-placeholder">
+                🎧 Episode 0: 24 Years, 100 Songs<br />
+                [Embedded podcast player will appear here — auto-synced from your host]
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="two-col">
+                <img src="https://placehold.co/400x500/2D2D2D/F0EDE8?text=Your+Photo" alt="Host photo" />
+                <div>
+                    <h2>Hi, I’m [Your Name]</h2>
+                    <p>I’m 38. When I was 14, I wrote a top 100 song list in a spiral notebook. I’ve updated it every year since — cutting songs that no longer hit, adding new tracks that unlock forgotten memories.</p>
+                    <p>This podcast is not about music criticism. It’s about the stories we attach to songs. The 7th grade dance, the cross-country road trip, the hard breakup — the moments that would fade if not for a 3-minute track.</p>
+                    <p>Every week, I chat with guests who have made their own top 100 lists. We debate rankings, share the memories behind their #1 song, and talk about why maintaining a list is the most rewarding tedious project you will ever commit to.</p>
+                    <a href="#list" class="btn">Make Your List</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Episodes -->
+    <section id="episodes">
+        <div class="container">
+            <h2>Episodes</h2>
+            <div class="episode-grid" id="episode-list">
+                <!-- Episode cards populated by CMS -->
+                <div class="episode-card">
+                    <h3>Episode 0: 24 Years, 100 Songs</h3>
+                    <p>The origin story. Three deep-dive memories. Why I’ve never quit updating the list.</p>
+                    <a href="#" class="btn">Play</a>
+                </div>
+                <div class="episode-card">
+                    <h3>Episode 1: Sarah’s Unchanging #1</h3>
+                    <p>Guest Sarah. Her #1 song has not changed in 24 years. We argue about Britney Spears.</p>
+                    <a href="#" class="btn">Play</a>
+                </div>
+                <div class="episode-card">
+                    <h3>Episode 2: The Breakup Playlist</h3>
+                    <p>Guest Mike. His entire top 10 is breakup songs. We unpack why.</p>
+                    <a href="#" class="btn">Play</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Make Your List -->
+    <section id="list">
+        <div class="container">
+            <h2>Make Your Own Top 100 List</h2>
+            <p>Want to be a guest? Download the free template and submit your list.</p>
+            <div class="form-placeholder">
+                <p style="color: var(--gold);">📝 Newsletter signup + template download will appear here.</p>
+                <p>Enter your email to receive the template.</p>
+                <input type="email" placeholder="your@email.com" style="padding:0.6rem; width:100%; margin-bottom:1rem; background:#1a1a1a; border:1px solid var(--grey); color:var(--text);" />
+                <button class="btn">Send Me the Template</button>
+            </div>
+            <div class="form-placeholder" style="margin-top:2rem;">
+                <p style="color: var(--gold);">📋 Google Form for list submissions will be embedded here.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>Want to be a guest? Press inquiries? Just want to share a song that changed your life?</p>
+            <div class="form-placeholder">
+                <p style="color: var(--gold);">✉️ Contact form will appear here.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Rank & Recall. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">TikTok</a> &nbsp;·&nbsp; <a href="#">Twitter</a> &nbsp;·&nbsp; <a href="#">Spotify</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--grey);">
+                Built with the Memory Vault system. Edit at yoursite.com/admin.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
